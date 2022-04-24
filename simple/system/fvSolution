@@ -1,0 +1,116 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v1806                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      fvSolution;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+solvers
+{
+    p
+    {
+        solver          GAMG;
+        smoother        GaussSeidel;
+        tolerance       1e-8;
+        relTol          0.1;
+        maxIter	        200;
+    }
+
+
+    U
+    {
+        solver          smoothSolver;
+        smoother        GaussSeidel; // GaussSeidel symGaussSeidel DIC DICGaussSeidel DILU
+        tolerance       1e-8; 
+        relTol          0.1;  
+        nSweeps         2; //number of sweeps, by the nSweeps keyword, before the residual is recalculated
+        maxIter	        200;
+    }
+
+    omega
+    {
+        solver          smoothSolver;
+        smoother        GaussSeidel;
+        tolerance       1e-8;
+        relTol          0.1;
+        nSweeps         2;
+        maxIter	        200;
+    }
+
+    k
+    {
+        solver          smoothSolver;
+        smoother        GaussSeidel;
+        tolerance       1e-8;
+        relTol          0.1;
+        nSweeps         2;
+        maxIter	        200;
+    }
+
+}
+
+SIMPLE
+{
+    nNonOrthogonalCorrectors 0; // for orthogonal MEshes == 0 for nonOrthogonal == 20
+    consistent yes; // enable SIMPLEC
+    
+    residualControl
+    {
+        p               1e-5;
+        U               1e-5;
+        k               1e-5;
+        omega           1e-5;
+    }
+    pRefValue		0;
+    pRefCell		0;
+}
+
+
+relaxationFactors
+{
+    // For SIMPLEC
+    fields
+    {
+    }
+    
+    equations
+    {
+        U               0.9;
+        k               0.9;
+        omega           0.9;
+    }
+    // The SIMPLEC formulation for the pressure-velocity coupling method needs only a small amount of under-relaxation for velocity and other transport equations.
+    // There is no need to use any relaxation on pressure. This results typically in more robust solution and faster convergence.
+
+    // For SIMPLE
+//   fields
+//     {
+//         p       0.3;
+//         U	   0.7;
+//         k       0.8;
+//         omega   0.8;
+//     }
+//     
+//     equations
+//     {
+//         U               0.5;
+//         k               0.5;
+//         omega           0.5;
+//     }
+}
+
+cache
+{
+    grad(U);
+}
+
+// ************************************************************************* //
