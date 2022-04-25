@@ -1,68 +1,80 @@
-<mxfile host="app.diagrams.net" modified="2022-04-25T14:19:23.778Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36" etag="Ua65mtPy6aU7R8eyu7B2" version="17.4.6" type="github">
+<mxfile host="app.diagrams.net" modified="2022-04-25T14:23:51.936Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36" etag="LBE3ADUKnKQplQ3K9CBQ" version="17.4.6" type="github">
   <diagram id="eMEXFVPTn1vQ0_O8892t" name="Page-1">
-    <mxGraphModel dx="1113" dy="759" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1183" dy="806" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
         <mxCell id="0xNaplicuXCtEhgpEBbW-3" value="&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;align=center;labelPosition=center;verticalLabelPosition=middle;verticalAlign=middle;" vertex="1" parent="1">
-          <mxGeometry x="98" y="20" width="630" height="150" as="geometry" />
+          <mxGeometry x="98" y="10" width="630" height="150" as="geometry" />
         </mxCell>
         <mxCell id="0xNaplicuXCtEhgpEBbW-6" value="&lt;h1&gt;Постановка задачи&lt;/h1&gt;&lt;p&gt;Расчёт нестационарного течения воды в канале с препятствием в пакете OpenFoam.&lt;/p&gt;&lt;p&gt;Канал имеет форму&amp;nbsp;параллелепипеда. В качестве препятствия рассматривается квадратная балка, вставленная поперек канала.&lt;/p&gt;&lt;p&gt;Граничные условия ставятся на входе для скорости и на выходе для давления.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="108" y="20" width="590" height="220" as="geometry" />
+          <mxGeometry x="108" y="10" width="590" height="220" as="geometry" />
         </mxCell>
         <mxCell id="0xNaplicuXCtEhgpEBbW-8" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
-          <mxGeometry x="118" y="190" width="440" height="110" as="geometry" />
+          <mxGeometry x="118" y="180" width="440" height="110" as="geometry" />
         </mxCell>
         <mxCell id="0xNaplicuXCtEhgpEBbW-9" value="&lt;h1&gt;&lt;span style=&quot;font-size: 12px&quot;&gt;Теоретические расчеты&lt;/span&gt;&lt;/h1&gt;&lt;p&gt;&lt;font style=&quot;font-size: 12px&quot;&gt;На данном этапе проводится т&lt;/font&gt;&lt;span&gt;еоретическая оценка частоты основного тона пульсаций, необхо&lt;/span&gt;&lt;span&gt;димого расчетного шага по времени и количества сохраняемых реализаций&lt;/span&gt;&lt;span&gt;&amp;nbsp;достаточного для Фурье преобразования.&lt;/span&gt;&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="128" y="190" width="440" height="140" as="geometry" />
+          <mxGeometry x="128" y="180" width="440" height="140" as="geometry" />
         </mxCell>
         <mxCell id="0xNaplicuXCtEhgpEBbW-11" value="" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;fontSize=12;fillColor=#d5e8d4;strokeColor=#82b366;" edge="1" parent="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="392.63" y="300" as="sourcePoint" />
-            <mxPoint x="393" y="350" as="targetPoint" />
+            <mxPoint x="392.63" y="290" as="sourcePoint" />
+            <mxPoint x="393" y="340" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="0xNaplicuXCtEhgpEBbW-12" value="" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
-          <mxGeometry x="118" y="350" width="442" height="130" as="geometry" />
+          <mxGeometry x="118" y="340" width="442" height="130" as="geometry" />
         </mxCell>
         <mxCell id="0xNaplicuXCtEhgpEBbW-14" value="&lt;h1&gt;&lt;span style=&quot;font-size: 12px&quot;&gt;Предварительный стационарный расчет&lt;/span&gt;&lt;/h1&gt;&lt;div&gt;Расчет методом SIMPLEС с RANS&amp;nbsp; k − ω SST моделью турбулентности.&amp;nbsp;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Проводится для предварительной оценки течения жидкости по каналу, определения областей наибольшей завихренности, областей генерации вихрей и определения областей наибольшей пульсации давления.&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="128" y="350" width="422" height="140" as="geometry" />
+          <mxGeometry x="128" y="340" width="422" height="140" as="geometry" />
         </mxCell>
         <mxCell id="0xNaplicuXCtEhgpEBbW-15" value="" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
-          <mxGeometry x="118" y="530" width="442" height="130" as="geometry" />
+          <mxGeometry x="118" y="520" width="442" height="130" as="geometry" />
         </mxCell>
         <mxCell id="0xNaplicuXCtEhgpEBbW-18" value="" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;fontSize=12;exitX=0.645;exitY=0.929;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.639;entryY=-0.025;entryDx=0;entryDy=0;entryPerimeter=0;fillColor=#d5e8d4;strokeColor=#82b366;" edge="1" parent="1" source="0xNaplicuXCtEhgpEBbW-14" target="0xNaplicuXCtEhgpEBbW-15">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="420" y="690" as="sourcePoint" />
-            <mxPoint x="470" y="640" as="targetPoint" />
+            <mxPoint x="420" y="680" as="sourcePoint" />
+            <mxPoint x="470" y="630" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="0xNaplicuXCtEhgpEBbW-20" value="&lt;h1&gt;&lt;span style=&quot;font-size: 12px&quot;&gt;Нестационарный расчет с адаптируемым шагом по времени&lt;/span&gt;&lt;/h1&gt;&lt;div&gt;Нестационарный расчет с использованием вихроразрешающего подхода DDES k − ω SST. Расчет ведется до тех пор, пока не реализуется квазистационарное течение. Для интегрирования уравнений движения применяется модифицированный метод PISO, в котором шаг коррекции давления выполняется методом SIMPLEC.&lt;br&gt;&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="127" y="525" width="423" height="140" as="geometry" />
+          <mxGeometry x="127" y="515" width="423" height="140" as="geometry" />
         </mxCell>
         <mxCell id="0xNaplicuXCtEhgpEBbW-21" value="" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
-          <mxGeometry x="118" y="709.94" width="442" height="140.06" as="geometry" />
+          <mxGeometry x="118" y="699.94" width="442" height="140.06" as="geometry" />
         </mxCell>
         <mxCell id="0xNaplicuXCtEhgpEBbW-22" value="" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;fontSize=12;exitX=0.645;exitY=0.929;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.639;entryY=-0.025;entryDx=0;entryDy=0;entryPerimeter=0;fillColor=#d5e8d4;strokeColor=#82b366;" edge="1" parent="1" target="0xNaplicuXCtEhgpEBbW-21">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="400.1899999999998" y="660" as="sourcePoint" />
-            <mxPoint x="470" y="819.94" as="targetPoint" />
+            <mxPoint x="400.1899999999998" y="650" as="sourcePoint" />
+            <mxPoint x="470" y="809.94" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="0xNaplicuXCtEhgpEBbW-23" value="&lt;h1&gt;&lt;span style=&quot;font-size: 12px&quot;&gt;Нестационарный расчет с фиксированным шагом по времени&lt;/span&gt;&lt;/h1&gt;&lt;div&gt;Нестационарный расчет течения в трубе с использованием вихроразрешающего подхода DDES-k − ω SST с фиксированным шагом по времени. При этом, для каждого шага по времени в каждой ячейке граничащей со стенкой трубы и балки сохраняются в файлы со значением давления. Так же сохраняются данные в численных гидрофонах вдоль трубы.&lt;br&gt;&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="125.5" y="704.94" width="423" height="140" as="geometry" />
+          <mxGeometry x="125.5" y="694.94" width="423" height="140" as="geometry" />
         </mxCell>
         <mxCell id="0xNaplicuXCtEhgpEBbW-24" value="" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
-          <mxGeometry x="118" y="899.94" width="442" height="120.06" as="geometry" />
+          <mxGeometry x="118" y="889.94" width="442" height="120.06" as="geometry" />
         </mxCell>
         <mxCell id="0xNaplicuXCtEhgpEBbW-25" value="" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;fontSize=12;exitX=0.645;exitY=0.929;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.639;entryY=-0.025;entryDx=0;entryDy=0;entryPerimeter=0;fillColor=#d5e8d4;strokeColor=#82b366;" edge="1" parent="1" target="0xNaplicuXCtEhgpEBbW-24">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="400.1899999999998" y="849.9999999999998" as="sourcePoint" />
-            <mxPoint x="470" y="1009.94" as="targetPoint" />
+            <mxPoint x="400.1899999999998" y="839.9999999999998" as="sourcePoint" />
+            <mxPoint x="470" y="999.94" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="0xNaplicuXCtEhgpEBbW-26" value="&lt;h1&gt;&lt;span style=&quot;font-size: 12px&quot;&gt;Алгоритм быстрого преобразования Фурье&lt;/span&gt;&lt;/h1&gt;&lt;div&gt;&lt;div&gt;Применяется на полученные зависимости давления от времени в каждой точке стенки и позволяет найти области максимального нестационарного воздействия жидкости на стенки, а так же выделить наиболее значимые частоты.&lt;/div&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="125.5" y="894.94" width="423" height="140" as="geometry" />
+          <mxGeometry x="125.5" y="884.94" width="423" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="0xNaplicuXCtEhgpEBbW-28" value="" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="116" y="1059.94" width="442" height="90.06" as="geometry" />
+        </mxCell>
+        <mxCell id="0xNaplicuXCtEhgpEBbW-29" value="" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;fontSize=12;exitX=0.645;exitY=0.929;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.639;entryY=-0.025;entryDx=0;entryDy=0;entryPerimeter=0;fillColor=#f8cecc;strokeColor=#b85450;" edge="1" parent="1" target="0xNaplicuXCtEhgpEBbW-28">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="398.1899999999998" y="1009.9999999999998" as="sourcePoint" />
+            <mxPoint x="468" y="1169.94" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="0xNaplicuXCtEhgpEBbW-30" value="&lt;h1&gt;&lt;span style=&quot;font-size: 12px&quot;&gt;Расширение&lt;/span&gt;&lt;/h1&gt;&lt;div&gt;&lt;div&gt;Полученные результаты можно использовать как входные данные для виброакустической задачи расчета вибраций в упругих стенках канала.&lt;/div&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="text;html=1;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="123.5" y="1054.94" width="423" height="95.06" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
