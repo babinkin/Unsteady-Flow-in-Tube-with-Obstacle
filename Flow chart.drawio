@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-04-25T13:50:48.642Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36" etag="1mcU4XkNUSPlLRaB2FhB" version="17.4.6" type="github">
+<mxfile host="app.diagrams.net" modified="2022-04-25T13:56:56.910Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36" etag="RgBiZUOCbcuZDs2ZTMZb" version="17.4.6" type="github">
   <diagram id="eMEXFVPTn1vQ0_O8892t" name="Page-1">
     <mxGraphModel dx="701" dy="478" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -9,6 +9,12 @@
         </mxCell>
         <mxCell id="0xNaplicuXCtEhgpEBbW-6" value="&lt;h1&gt;Постановка задачи&lt;/h1&gt;&lt;p&gt;Расчёт нестационарного течения воды в канале с препятствием в пакете OpenFoam.&lt;/p&gt;&lt;p&gt;Канал имеет форму&amp;nbsp;параллелепипеда. В качестве препятствия рассматривается квадратная балка, вставленная поперек канала.&lt;/p&gt;&lt;p&gt;Граничные условия ставятся на входе для скорости и на выходе для давления.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="1">
           <mxGeometry x="40" y="30" width="590" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="0xNaplicuXCtEhgpEBbW-8" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="50" y="200" width="420" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="0xNaplicuXCtEhgpEBbW-9" value="&lt;h1&gt;&lt;span style=&quot;font-size: 12px&quot;&gt;Теоретические расчеты&lt;/span&gt;&lt;/h1&gt;&lt;p&gt;&lt;font style=&quot;font-size: 12px&quot;&gt;На данном этапе т&lt;/font&gt;&lt;span&gt;еоретическая оценка частоты основного тона пульсаций, необхо&lt;/span&gt;&lt;span&gt;димого расчетного шага по времени и количества сохраняемых реализаций&lt;/span&gt;&lt;span&gt;&amp;nbsp;достаточного для Фурье преобразования.&lt;/span&gt;&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="60" y="200" width="430" height="140" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
