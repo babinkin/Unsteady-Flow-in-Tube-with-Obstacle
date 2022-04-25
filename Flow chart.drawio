@@ -1,1 +1,13 @@
-<mxfile host="app.diagrams.net" modified="2022-04-25T13:26:57.716Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36" etag="t9zMr6f5x080-O8MntT-" version="17.4.6" type="github"><diagram id="eMEXFVPTn1vQ0_O8892t" name="Page-1">ddHNEoIgEADgp+GuYJZns7p08tCZkU2YQZdBGq2nTwfNGOvCLN8uLD+E5c1wttzIKwrQhEZiIOxIKM2SdBwneHpIk52H2irhKV6hVC+YMZr1oQR0QaFD1E6ZECtsW6hcYNxa7MOyO+qwq+E1bKCsuN7qTQknvR7ofvULqFouneM085mGL8XzTTrJBfZfxArCcovofNQMOejp7ZZ38etOf7Kfg1lo3Y8FY7DuPU6CD2LFGw==</diagram></mxfile>
+<mxfile host="app.diagrams.net" modified="2022-04-25T13:27:53.289Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36" etag="eZZ-cJuh0oJdYVledPdN" version="17.4.6" type="github">
+  <diagram id="eMEXFVPTn1vQ0_O8892t" name="Page-1">
+    <mxGraphModel dx="701" dy="478" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="0xNaplicuXCtEhgpEBbW-1" value="Предварительный стационарный расчёт" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="30" y="80" width="120" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
