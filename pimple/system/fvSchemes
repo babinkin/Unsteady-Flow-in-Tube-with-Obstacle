@@ -1,0 +1,108 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v1806                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      fvSchemes;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+ddtSchemes
+{
+    default         CrankNicolson 1;
+}
+
+// --------------------------------------------------------------------------------------------------------------------
+// "Gauss linear" and leastSquares (more accurate)
+// can use limiters: cellMDLimited cellLimited faceMDLimited faceLimited (Less diffusive -- More diffusive)
+// can use blending psi: 0 (Accuraacy off limiter) -- 1 (stability)
+// for non-orthogonal >85: faceLimited leastSquares 1.0, 70-85: cellLimited leastSquares 1.0, 
+// 60-70: cellMDLimited Gauss linear 0.5, 40-60: cellMDLimited Gauss linear 0.5
+
+gradSchemes
+{
+    default         cellMDLimited Gauss linear 0.5;               
+}
+
+// --------------------------------------------------------------------------------------------------------------------
+// Ansys Fluent Default
+divSchemes
+{
+  div(phi,U)                        Gauss linearUpwind grad(U);
+  div(phi,omega)                    Gauss upwind;
+  div(phi,k)                        Gauss upwind;
+  div((nuEff*dev2(T(grad(U)))))     Gauss linear;
+}
+
+// -------------------------------
+
+// // Dissipative and robust
+// divSchemes{
+//   div(phi,U) Gauss upwind;
+//   div(phi,omega) Gauss upwind;
+//   div(phi,k) Gauss upwind;
+//   div((nuEff*dev2(T(grad(U))))) Gauss linear;
+// }
+
+// Accurate and stable
+// divSchemes
+// {
+//   div(phi,U)                        Gauss linearUpwind grad(U);
+//   div(phi,omega)                    Gauss linearUpwind default;
+//   div(phi,k)                        Gauss linearUpwind default;
+//   div((nuEff*dev2(T(grad(U)))))     Gauss linear;
+//
+// }
+// divSchemes
+// {
+//   div(phi,U)                        Gauss linearUpwind grad(U);
+//   div(phi,omega)                    Gauss limitedLinear 0.1;
+//   div(phi,k)                        Gauss limitedLinear 0.1;
+//   div((nuEff*dev2(T(grad(U)))))     Gauss linear;
+// }
+
+// // More accurate but oscilatory
+// divSchemes
+// {
+//   div(phi,U) Gauss linear;
+//   div(phi,omega) Gauss linearUpwind default;
+//   div(phi,k) Gauss linearUpwind default;
+//   div((nuEff*dev2(T(grad(U))))) Gauss linear;
+//   
+// }
+
+
+// --------------------------------------------------------------------------------------------------------------------
+//  blending sheme.  for low non-orthogonal psi = 1  and poor mesh psi<1
+// limited 1 ==  corrected == orthogonal       for orthogonal meshes
+// for non-orthogonal mesh need set e.g. psi = 0.5
+// for non-orthogonal > 85 psi - 0.333, 70-85 psi = 0.5, 60 -70 psi 0.777, 40-50 psi = 1
+laplacianSchemes
+{
+    default    Gauss linear limited 1;
+}
+snGradSchemes
+{
+    default    limited 1.0;
+}
+
+// --------------------------------------------------------------------------------------------------------------------
+interpolationSchemes
+{
+    default         linear;
+}
+
+wallDist
+{
+    method          meshWave;
+}
+
+
+// ************************************************************************* //
