@@ -1,0 +1,414 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v1806                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      controlDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+application     pimpleFoam;
+
+startFrom       latestTime; // startTime latestTime
+
+startTime       0;
+
+stopAt          endTime;
+
+endTime         0.8;
+
+deltaT          2.0e-6; // CFL = 7: dt = 2.04e-05 need 7.6e-5
+
+writeControl    adjustableRunTime; // adjustableRunTime timeStep
+
+writeInterval   1e-3; // num time step 50 or time interval 1e-3
+
+purgeWrite      5;
+
+writeFormat     binary; // binary ascii
+
+writePrecision  6;
+
+writeCompression off;
+
+timeFormat      general;
+
+timePrecision   6;
+
+runTimeModifiable true;
+
+// PIMPLE time Controls
+adjustTimeStep  yes; // yes no
+
+maxCo           7.0; // CFL 1: dt=3.2e-6, 7: dt = 2.04e-05, 20: dt = 7.4e-5
+
+functions{
+	// ------------------------------------------------------------------------------------------
+	wallPressure{
+		type            surfaces;
+		// libs            ("libsampling.so" "libsamplingnew.so");
+		libs            ("libsampling.so");
+		enabled			yes;
+		log				yes;
+
+		// executeControl	timeStep;
+		// executeInterval	1;
+		writeControl    adjustableRunTime;
+		writeInterval   6e-5;
+
+		surfaceFormat   ensight; // ensight foam raw boundaryData boundaryDataNew(without geometry)
+		formatOptions {
+		    boundaryDataNew {
+		        format  binary; // binary ascii
+		    }
+	        ensight {
+	            format          binary;	// binary ascii
+	            collateTimes    true;
+	        }
+		}
+
+		fields			( p ); // if without fields == write geometry only (face center)
+		// fields			( );
+		interpolationScheme cellPoint;
+
+		surfaces (
+			wall1{
+				type        patch;
+		        patches     ( wall1 );
+		        triangulate false;
+				interpolate false;
+			}
+			wall2{
+				type        patch;
+		        patches     ( wall2 );
+		        triangulate false;
+				interpolate false;
+			}
+			wall3{
+				type        patch;
+		        patches     ( wall3 );
+		        triangulate false;
+				interpolate false;
+			}
+		);
+	}
+
+	// ------------------------------------------------------------------------------------------
+	// // second variand sample pressure from patch
+	// wallPressureV2{
+	//         type            surfaceFieldValue;
+	//         libs            ("libfieldFunctionObjects.so");
+	// 	enabled			yes;
+	// 	log				yes;
+	//
+	// 	executeControl	timeStep;
+	// 	executeInterval	1;
+	//  writeControl    timeStep;
+	// 	writeInterval   1;
+	//
+	// 	writeFields     true;		// Write the region field values
+	// 	surfaceFormat	boundaryDataNew;	// output value format
+	// 	regionType		patch;	// face regionType: see below
+	// 	name			wall1;	// name of face regionType if required
+	// 	operation		none;	// operation to perform
+	// 	fields			(p);	// list of fields to operate on
+	//
+	// 	// weightField			// name of field to apply weighting (need if operation = weightedAverage)
+	// 	scaleFactor		1;		// scale factor
+	// 	postOperation	none;	// post-operation to perform (none sqrt)
+	// 	writeArea		false;	// Write the area of the surfaceFieldValue
+	//
+	// 	formatOptions{
+	// 	    boundaryDataNew
+	// 	    {
+	// 	        format  binary; // binary ascii
+	// 	    }
+	// 	}
+	// }
+
+	// ------------------------------------------------------------------------------------------
+	probes{
+	        type            probes;
+	        libs            ("libsampling.so");
+			enabled			yes;
+			log				yes;
+
+			// executeControl	timeStep;
+			// executeInterval	1;
+	        writeControl    adjustableRunTime;
+			writeInterval   6e-5;
+
+	        probeLocations
+	        (
+				(0.05 0.025 0.000)
+				(0.10 0.025 0.000)
+	            (0.15 0.025 0.000)
+	            (0.20 0.025 0.000)
+				(0.25 0.025 0.000)
+				(0.30 0.025 0.000)
+		        (0.35 0.025 0.000)
+		        (0.40 0.025 0.000)
+				(0.45 0.025 0.000)
+				(0.05 0.000 0.025)
+				(0.10 0.000 0.025)		// not found
+		        (0.15 0.000 0.025)
+		        (0.20 0.000 0.025)
+				(0.25 0.000 0.025)
+				(0.30 0.000 0.025)
+			    (0.35 0.000 0.025)
+			    (0.40 0.000 0.025)
+				(0.45 0.000 0.025)
+	        );
+	        fields  (p);
+
+			fixedLocations		true;		// do not recalculate cells if mesh moves
+			interpolationScheme	cell;		// interpolation scheme to use
+			includeOutOfBounds	true;		// filter out points that haven't been found. Default is to include them (with value -VGREAT)
+	}
+
+	// ------------------------------------------------------------------------------------------
+	// probesV2{
+	// 	type            sets;
+	// 	libs            ("libsampling.so");
+	// 	enabled			yes;
+	// 	log				yes;
+	//
+	// 	executeControl	timeStep;
+	// 	executeInterval	1;
+	//  writeControl    timeStep;
+	// 	writeInterval   1;
+	//
+	// 	setFormat       raw;
+	//         fields			( p );
+	//         interpolationScheme cell;
+	//
+	//         sets (
+	// 		cloud {
+	//                 type        cloud;
+	// 			axis    xyz;
+	// 			points	(
+	// 				(0.15 0.025 0.0)
+	// 			    (0.10 0.025 0.0)
+	// 			);
+	//             }
+	//         );
+}
+
+
+
+
+
+
+// ===========================================================================================
+// functionObjects
+//
+// Property				Description									Required		Default
+// type					Type of function object						yes
+// libs					Libraries containing implementation			yes
+// region				Name of region for multi-region cases		no
+// enabled				On/off switch								no				yes
+// log					Log information to standard output			no				yes
+// timeStart			Start time									no
+// timeEnd				End time									no
+//
+// executeControl		See time controls below						no				timeStep
+// executeInterval		Steps between each execute phase			no
+// writeControl			See time controls below						no				timeStep
+// writeInterval		Steps between each write phase				no
+//
+//
+// timeStep				Execute/write every 'Interval' time-steps
+// writeTime			Execute/write every 'Interval' output times
+// adjustableRunTime	Execute/write every 'Interval' run time period
+// runTime				Execute/write every 'Interval' run time period
+// clockTime			Execute/write every 'Interval' clock time period
+// cpuTime				Execute/write every 'Interval' CPU time period
+// none					Execute/write disabled
+
+// ===========================================================================================
+// Surface sampling definition
+//
+// Property				Description									Required		Default
+// type					surfaces									yes
+// fields				word/regex list of fields to sampled		yes
+// sampleScheme			scheme to obtain face centre value			no				cell
+// interpolationScheme	scheme to obtain node values				yes
+// surfaceFormat		output surface format						yes
+// formatOptions		dictionary of format options				no
+// surfaces				the list of sample surfaces					recommended
+
+// surfaceFormat
+// boundaryData
+// null        	: 		suppress output
+// ensight     	: 		Ensight Gold format, one field per case file
+// foam	    	: 		separate points, faces and values file
+// dx          	: 		DX scalar or vector format
+// vtk         	: 		VTK ascii format
+// raw         	: 		x y z value format for use with e.g. gnuplot 'splot'.
+
+// --------------------------------------------------------
+// patch
+//
+// Property				Description									Required		Default
+// type					patch										yes
+// patches				patch selection as word/regex list			yes
+// triangulate			triangulate faces							no				false
+// interpolate     													no
+
+// --------------------------------------------------------
+// patchInternalField
+//
+// Property				Description									Required		Default
+// type					patchInternalField							yes
+// patches				patch selection as word/regex list			yes
+// offsetMode			normal/uniform/nonuniform					no				normal
+// distance				distance for normal offset					partly
+// offset				point offset for uniform offset				partly
+// offsets				point offsets for nonuniform offset			partly
+// triangulate			triangulate faces							no				false
+// interpolate     													no
+
+// --------------------------------------------------------
+// sampledTriSurfaceMesh
+//
+// 6 different modes:
+// source=cells, interpolate=false	 				finds per triangle centre the nearest cell centre and uses its value
+// source=cells, interpolate=true 					finds per triangle centre the nearest cell centre. Per surface point checks if this nearest cell is the one containing point; otherwise projects the point onto the nearest point on the boundary of the cell (to make sure interpolateCellPoint gets a valid location)
+// source=insideCells, interpolate=false 			finds per triangle centre the cell containing it and uses its value. Trims triangles outside mesh.
+// source=insideCells, interpolate=true 			Per surface point interpolate cell containing it.
+// source=boundaryFaces, interpolate=false 			finds per triangle centre the nearest point on the boundary (uncoupled faces only) and uses the value (or 0 if the nearest is on an empty boundary)
+// source=boundaryFaces, interpolate=true 			finds per triangle centre the nearest point on the boundary (uncoupled faces only). Per surface point projects the point onto this boundary face (to make sure interpolateCellPoint gets a valid location)
+//
+//
+// Property				Description									Required		Default
+// type					sampledTriSurfaceMesh						yes
+// surface				surface name in triSurface/					yes
+// source				cells/insideCells/boundaryFaces				yes
+// interpolate 														no
+// keepIds				pass through id numbering					no				false
+
+
+
+// ===========================================================================================
+// probes
+//
+// fields				Fields to be probed          				(p U);
+// fixedLocations  		do not recalculate cells if mesh moves		no				false
+// interpolationScheme 	interpolation scheme to use					no				cell
+// includeOutOfBounds  	filter out points that haven't been found	no				true;
+// probeLocations
+//     (
+//         ( 1e-06 0 0.01 )      // at inlet
+//         (0.21 -0.20999 0.01)  // at outlet1
+//         (0.21 0.20999 0.01)   // at outlet2
+//         (0.21 0 0.01)         // at central block
+//     );
+
+
+// ===========================================================================================
+// set --
+// setFormat Set output format : xmgr jplot gnuplot raw vtk csv
+
+// interpolationScheme. choice of
+//      cell          : use cell-centre value only; constant over cells (default)
+//      cellPoint     : use cell-centre and vertex values
+//      cellPointFace : use cell-centre, vertex and face values.
+//      pointMVC      : use point values only (Mean Value Coordinates)
+//      cellPatchConstrained : use cell-centre except on boundary faces where
+//        it uses the boundary value. For use with e.g. patchCloudSet.
+// 1] vertex values determined from neighbouring cell-centre values
+// 2] face values determined using the current face interpolation scheme
+//    for the field (linear, gamma, etc.)
+
+// --------------------------------------------------------
+// patchCloud
+//
+// Property				Description									Required		Default
+// type					patchCloud									yes
+// axis					x, y, z, xyz, distance						yes
+// patches				List of patch names or regexs				yes
+// points				List of selected locations					yes
+// maxDistance			Max search distance							yes
+
+// --------------------------------------------------------
+// cloud
+//
+// Property				Description									Required		Default
+// type					cloud										yes
+// axis					x, y, z, xyz, distance						yes
+// points				The locations								yes
+
+// --------------------------------------------------------
+// triSurfaceMeshPointSet
+
+// --------------------------------------------------------
+// patchSeed
+
+
+// ===========================================================================================
+// surfaceFieldValue
+//
+// Property				Description									Required		Default
+// type					type name: surfaceFieldValue				yes
+// log					write data to standard output				no				no
+// writeFields			Write the region field values				yes
+// writeArea			Write the area of the surfaceFieldValue		no
+// surfaceFormat		output value format							no
+// regionType			face regionType: see below					yes
+// name					name of face regionType if required			no
+// operation			operation to perform						yes
+// postOperation		post-operation to perform					no				none
+// weightField			name of field to apply weighting			no
+// scaleFactor			scale factor								no				1
+// fields				list of fields to operate on				yes
+//
+// Where regionType is defined by
+//
+// faceZone			:	requires a name entry to specify the faceZone
+// patch			:	requires a name entry to specify the patch
+// surface			:	requires a name entry to specify the surfMesh
+// sampledSurface	:	requires a sampledSurfaceDict sub-dictionary
+//
+// The operation is one of:
+//
+// none				:	no operation
+// min				:	minimum
+// max				:	maximum
+// sum				:	sum
+// sumMag			:	sum of component magnitudes
+// sumDirection		:	sum values that are positive in given direction
+// sumDirectionBalance	:	sum of balance of values in given direction
+// average			:	ensemble average
+// areaAverage		:	area-weighted average
+// areaIntegrate	:	area integral
+// CoV				:	coefficient of variation: standard deviation/mean
+// areaNormalAverage	:	area-weighted average in face normal direction
+// areaNormalIntegrate	:	area-weighted integral in face normal directon
+// uniformity		:	uniformity index
+// weightedSum		:	weighted sum
+// weightedAverage	:	weighted average
+// weightedAreaAverage	:	weighted area average
+// weightedAreaIntegrate	:	weighted area integral
+// weightedUniformity	:	weighted uniformity index
+// absWeightedSum	:	sum using absolute weighting
+// absWeightedAverage	:	average using absolute weighting
+// absWeightedAreaAverage	:	area average using absolute weighting
+// absWeightedAreaIntegrate	:	area integral using absolute weighting
+// absWeightedUniformity	:	uniformity index using absolute weighting
+
+
+
+// find $FOAM_TUTORIALS -name controlDict | xargs grep 'functions' -sl | xargs grep 'type' | xargs grep 'surfaceFieldValue'
+// surfaceMeshTriangulate wal1.stl -parallel -patches "(wall1)"
+
+
+
+
+// ************************************************************************* //
