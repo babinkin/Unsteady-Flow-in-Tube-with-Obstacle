@@ -20,33 +20,18 @@ internalField   uniform (5 0 0);
 
 boundaryField
 {
-    in
+    inlet
     {
         type            fixedValue;
         value           uniform (5 0 0);
     }
 
-    out
+    outlet
     {
         type            zeroGradient;
     }
-
-    sym
-    {
-        type            symmetryPlane;
-    }
     
-    wall1
-    {
-        type            noSlip;
-    }
-    
-    wall2
-    {
-        type            noSlip;
-    }
-    
-    wall3
+    wall-sys-solid
     {
         type            noSlip;
     }

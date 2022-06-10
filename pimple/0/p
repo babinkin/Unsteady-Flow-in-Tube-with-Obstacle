@@ -20,36 +20,23 @@ internalField   uniform 0;
 
 boundaryField
 {
-    in
+    inlet
     {
         type            zeroGradient;
     }
 
-    out
+    outlet
     {
         type            fixedValue;
         value           uniform 0;
     }
     
-    sym
-    {
-        type            symmetryPlane;
-    }
-
-    wall1
-    {
-        type            zeroGradient;
-    }
-
-    wall2
-    {
-        type            zeroGradient;
-    }
     
-    wall3
+    wall-sys-solid
     {
         type            zeroGradient;
     }
+
 }
 
 // ************************************************************************* //

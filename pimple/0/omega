@@ -21,37 +21,21 @@ internalField   uniform 86.37611;
 
 boundaryField
 {
-    in
+    inlet
     {
         type            fixedValue;
         value           $internalField;
     }
     
-    out
+    outlet
     {
         type            inletOutlet;
         inletValue      $internalField;
         value           $internalField;
     }
     
-    sym
-    {
-        type            symmetryPlane;
-    }
 
-    wall1
-    {
-        type            omegaWallFunction;
-        value           $internalField;
-    }
-    
-    wall2
-    {
-        type            omegaWallFunction;
-        value           $internalField;
-    }
-    
-    wall3
+    wall-sys-solid
     {
         type            omegaWallFunction;
         value           $internalField;

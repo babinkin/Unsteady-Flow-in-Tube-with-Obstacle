@@ -16,49 +16,28 @@ FoamFile
 
 dimensions      [0 2 -2 0 0 0 0];
 
-internalField   uniform 1.71366e-3; // Int = 0.676% Dg = 0.0125
+internalField   uniform 1.71366e-3;
 
 boundaryField
 {
-    in
+    inlet
     {
         type            fixedValue;
         value           $internalField;
     }
     
-    out
+    outlet
     {
         type            inletOutlet;
         inletValue      $internalField;
         value           $internalField;
     }
     
-    sym
-    {
-        type            symmetryPlane;
-    }
-
-    wall1
+    wall-sys-solid
     {
         type            kqRWallFunction;
-//         type            kLowReWallFunction;
         value           $internalField;
     }
-    
-    wall2
-    {
-        type            kqRWallFunction;
-//         type            kLowReWallFunction;
-        value           $internalField;
-    }
-    
-    wall3
-    {
-        type            kqRWallFunction;
-//         type            kLowReWallFunction;
-        value           $internalField;
-    }
-
 }
 
 

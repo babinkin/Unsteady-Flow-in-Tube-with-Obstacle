@@ -21,36 +21,19 @@ internalField   uniform 0;
 
 boundaryField
 {
-    in
+    inlet
     {
         type            calculated;
         value           uniform 0;
     }
 
-    out
+    outlet
     {
         type            calculated;
         value           uniform 0;
     }
-    
-    sym
-    {
-        type            symmetryPlane;
-    }
 
-    wall1
-    {
-        type            nutkWallFunction;
-        value           uniform 0;
-    }
-    
-    wall2
-    {
-        type            nutkWallFunction;
-        value           uniform 0;
-    }
-    
-    wall3
+    wall-sys-solid
     {
         type            nutkWallFunction;
         value           uniform 0;
