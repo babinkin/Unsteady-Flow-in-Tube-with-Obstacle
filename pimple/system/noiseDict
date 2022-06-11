@@ -1,0 +1,102 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v1806                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      noiseDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+noiseModel      pointNoise;
+
+pointNoiseCoeffs {
+
+	rhoRef          998.2;		
+   	N               13333;		
+    	fl              0;  		
+	startTime       0;			
+    	graphFormat     raw;		
+
+	writeOptions {
+		writePrmsf		true;
+		writeSPL		false;
+		writePSD		true;	
+		writePSDf		true;	
+		writeOctaves	false;
+	}
+
+	windowModel		uniform;	
+
+    HanningCoeffs {
+
+        overlapPercent  50;		
+	symmetric       yes;
+        extended        yes;
+	alpha		0.5;	
+    }
+
+    uniformCoeffs {
+        overlapPercent  0;		
+        value           1;
+    }
+
+    file               "postProcessing/probes/0/p";
+    nHeaderLine         20;        
+    refColumn           0;          
+    componentColumns    (2);	    
+    separator           " ";        
+    mergeSeparators     true;         
+}
+
+surfaceNoiseCoeffs {
+
+	rhoRef          998.2;		
+    	N               13333;		
+   	fl              10;			
+    	fu              2000;		
+	startTime       0;			
+    	graphFormat     raw;		
+
+	writeOptions {
+		writePrmsf		true;	
+		writeSPL		false;
+		writePSD		true;	
+		writePSDf		true;	
+		writeOctaves	false;
+
+        ensight {
+	    format		ascii;	
+            collateTimes	true;
+        }
+	}
+
+	windowModel		uniform;	
+
+    HanningCoeffs {
+        overlapPercent  	50;		
+	symmetric     	        yes;
+        extended        	yes;
+	alpha		        0.5;	
+    }
+
+    uniformCoeffs {
+        overlapPercent  0;		
+        value           1;
+    }
+
+    	fftWriteInterval	1;			
+	p			"p";		
+	reader      		ensight;	
+	writer      		ensight;	
+
+}
+
+// ************************************************************************* //

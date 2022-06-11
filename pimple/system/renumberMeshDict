@@ -1,0 +1,64 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v1806                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    note        "mesh renumbering dictionary";
+    object      renumberMeshDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+
+method          CuthillMcKee;
+
+CuthillMcKeeCoeffs
+{
+   reverse true;
+}
+
+manualCoeffs
+{
+    dataFile "cellMap";
+}
+
+structuredCoeffs
+{
+    patches (movingWall);
+    method  random;
+
+    depthFirst true;
+
+    reverse false;
+}
+
+
+springCoeffs
+{
+    maxCo 0.01;
+
+    freezeFraction 0.999;
+
+    maxIter 1000;
+}
+
+
+blockCoeffs
+{
+    method          scotch;
+}
+
+
+zoltanCoeffs
+{
+    ORDER_METHOD    LOCAL_HSFC;
+}
+
+
+// ************************************************************************* //

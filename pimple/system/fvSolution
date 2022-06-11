@@ -1,0 +1,101 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v1806                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      fvSolution;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+solvers
+{
+  p{
+    solver                  GAMG;
+    tolerance               5e-4;
+    relTol                  0.01;
+    smoother                GaussSeidel;
+    nPreSweeps              0;
+    nPostSweeps             2;
+    cacheAgglomeration      on;
+    agglomerator            faceAreaPair;
+    nCellsInCoarsestLevel   1000;
+    mergeLevels             1;
+    maxIter                 200;
+    minIter                 3;
+  }
+    
+    pFinal
+    {
+        $p;
+        tolerance       1e-04;
+        relTol          0;
+	maxIter	        200;
+    }
+    
+    "(U|k|omega)"
+    {
+        solver          smoothSolver;
+        smoother        GaussSeidel;
+        tolerance       1e-6; 
+        relTol          0.0;  
+        nSweeps         2; 
+        maxIter	        200;
+	minIter         2;
+    }
+
+    "(U|k|omega)Final"
+    {
+        $U;
+        tolerance       1e-6;
+        relTol          0;
+        maxIter	        200;
+    }
+
+}
+
+PIMPLE
+{
+    nOuterCorrectors         	20;    
+	momentumPredictor	yes;
+	nCorrectors             1;      
+	consistent 		yes;    
+    nNonOrthogonalCorrectors 	5;      
+    turbOnFinalIterOnly      	false;  
+    
+    residualControl
+    {
+        p               1e-3;
+        U               1e-3;
+        k               1e-3;
+        omega           1e-3;
+    }
+
+    pRefValue		0;
+    pRefCell		0;
+}
+
+
+relaxationFactors
+{
+    fields
+    {
+    }
+    
+    equations
+    {
+    }
+}
+
+cache
+{
+    grad(U);
+}
+
+// ************************************************************************* //
